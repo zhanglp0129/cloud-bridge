@@ -21,9 +21,9 @@ func ConfigRclone(c *gin.Context) {
 		c.String(401, "")
 		return
 	}
-	rsp := ConfigRsp{}
-	rsp.RemoteName = "MyCloudDrive"
-	rsp.RemoteType = "local"
-	rsp.Config.RemotePath = util.GetRemotePath()
-	c.JSON(200, rsp)
+	config := ConfigRsp{}
+	config.RemoteName = "MyCloudDrive"
+	config.RemoteType = "local"
+	config.Config.RemotePath = util.GetRemotePath()
+	c.JSON(200, config)
 }

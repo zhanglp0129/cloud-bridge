@@ -1,14 +1,18 @@
 package config
 
-import "github.com/spf13/viper"
+import (
+	"log"
+
+	"github.com/spf13/viper"
+)
 
 var C Config
 
 type Config struct {
-	ServerURL string `json:"server_url"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	MountPath string `json:"mount_path"`
+	ServerURL string `mapstructure:"server_url"`
+	Username  string `mapstructure:"username"`
+	Password  string `mapstructure:"password"`
+	MountPath string `mapstructure:"mount_path"`
 }
 
 // Init 初始化配置
@@ -21,9 +25,10 @@ func Init() error {
 	// 从环境变量读取
 	viper.SetEnvPrefix("CLIENT_BRIDGE")
 	viper.AutomaticEnv()
-	
+
 	if err := viper.Unmarshal(&C); err != nil {
 		return err
 	}
+	log.Printf("config: %+v", C)
 	return nil
 }

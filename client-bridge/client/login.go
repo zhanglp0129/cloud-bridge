@@ -33,7 +33,7 @@ func Login(username, password string) (string, error) {
 	// 发出请求
 	rsp, err := http.Post(url, "application/json", bytes.NewReader(body))
 	if err != nil {
-		return "", nil
+		return "", err
 	}
 	defer rsp.Body.Close()
 	// 获取token
