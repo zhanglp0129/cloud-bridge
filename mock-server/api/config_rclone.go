@@ -5,7 +5,7 @@ import (
 	"github.com/zhanglp0129/cloud-bridge/mock-server/util"
 )
 
-type ConfigStruct struct {
+type ConfigRsp struct {
 	RemoteName string `json:"remote_name"`
 	RemoteType string `json:"remote_type"`
 	Config     struct {
@@ -21,9 +21,9 @@ func ConfigRclone(c *gin.Context) {
 		c.String(401, "")
 		return
 	}
-	config := ConfigStruct{}
-	config.RemoteName = "MyCloudDrive"
-	config.RemoteType = "local"
-	config.Config.RemotePath = util.GetRemotePath()
-	c.JSON(200, config)
+	rsp := ConfigRsp{}
+	rsp.RemoteName = "MyCloudDrive"
+	rsp.RemoteType = "local"
+	rsp.Config.RemotePath = util.GetRemotePath()
+	c.JSON(200, rsp)
 }
