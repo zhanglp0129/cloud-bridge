@@ -64,7 +64,7 @@ go run ./client-bridge
 server_url: "http://127.0.0.1:8080"
 username: user
 password: pass
-mount_path: "X:" # 挂载路径
+mount_path: "~/MyCloudDrive" # 挂载路径
 ```
 
 ## 测试方法
