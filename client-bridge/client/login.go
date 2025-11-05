@@ -35,6 +35,7 @@ func Login(username, password string) (string, error) {
 	if err != nil {
 		return "", nil
 	}
+	defer rsp.Body.Close()
 	// 获取token
 	rspBytes, err := io.ReadAll(rsp.Body)
 	if err != nil {
