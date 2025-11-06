@@ -39,14 +39,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("rclone mount error: %v", err)
 	}
+	// 处理信号
+	signalHandle(cmd)
 	// 启动服务器
 	s := api.NewApi(rcloneConfig)
 	if err := s.Run("0.0.0.0:9527"); err != nil {
 		unmount(cmd)
 		log.Fatalf("server run error: %v", err)
 	}
-	// 处理信号
-	signalHandle(cmd)
 }
 
 // rclone在后台挂载
@@ -102,5 +102,10 @@ func unmount(cmd *exec.Cmd) {
 		if err := unmountCmd.Run(); err != nil {
 			log.Printf("run unmount error: %v", err)
 		}
+		// 如果还存在，则强制关闭
+		if cmd.ProcessState == nil || !cmd.ProcessState.Exited() {
+			cmd.Process.Kill()
+		}
+		os.Exit(0)
 	}
 }
