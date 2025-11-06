@@ -34,7 +34,7 @@ sudo apt install fuse
 
 ```bash
 # 使用包管理器或从官网下载
-macOS
+# macOS
 brew install rclone
 # Linux (Ubuntu/Debian)
 sudo apt install rclone
@@ -64,7 +64,7 @@ go run ./client-bridge
 server_url: "http://127.0.0.1:8080"
 username: user
 password: pass
-mount_path: "~/MyCloudDrive" # 挂载路径
+mount_path: "/root/MyCloudDrive" # 挂载路径
 ```
 
 ## 测试方法
@@ -99,14 +99,6 @@ cat /tmp/mock-remote-storage/local-test.txt
 ```bash
 # 触发强制同步
 curl -X POST http://localhost:9527/trigger-sync
-```
-### 3. 信号处理测试
-发送停止信号，验证优雅关闭：
-```bash
-# 查找进程ID
-ps aux | grep client-bridge
-# 发送停止信号
-kill -TERM <PID>
 ```
 
 ## License
