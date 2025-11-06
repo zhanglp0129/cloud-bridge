@@ -22,6 +22,7 @@ func TriggerSync(c *gin.Context) {
 		"--config", configFile,
 	}
 	cmd := exec.Command("rclone", args...)
+	cmd.Dir = rcloneConfigGlobal.Config.RemotePath
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {

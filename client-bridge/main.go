@@ -69,6 +69,8 @@ func rcloneMount(rcloneConfig *client.ConfigRsp) (*exec.Cmd, error) {
 	}
 	cmd := exec.Command("rclone", args...)
 	log.Printf("command: %v", cmd.Args)
+	// 设置工作目录
+	cmd.Dir = rcloneConfig.Config.RemotePath
 	// 捕获stdout和stderr
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
