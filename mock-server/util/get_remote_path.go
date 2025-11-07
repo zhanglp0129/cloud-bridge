@@ -1,10 +1,12 @@
 package util
 
-import "runtime"
+import (
+	"os"
+	"path"
+	"strings"
+)
 
 func GetRemotePath() string {
-	if runtime.GOOS == "windows" {
-		return "C:\\Users\\zhang\\AppData\\Local\\Temp\\mock-remote-storage"
-	}
-	return "/tmp/mock-remote-storage"
+	path := path.Join(os.TempDir(), "mock-remote-storage")
+	return strings.ReplaceAll(path, "\\", "/")
 }
